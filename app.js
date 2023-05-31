@@ -4,17 +4,19 @@ const result = document.querySelector("#mostrar-result");
 const resultArea = document.querySelector("#resultArea");
 const text = document.querySelector("#text");
 const btn = document.querySelectorAll(".btn");
-const resultado = document.querySelector(".result");
 
 const copiarTexto = ()=>{
-	
+	result.select();
+  	document.execCommand("copy");
+	alert("copiado!");
 }
 
 const mostrarTexto = (texto) =>{
 	document.querySelector(".result-area > h3").style.display ="none";
-	document.querySelector(".result").style.display ="none";
+	document.querySelector(".texto-descriptivo").style.display ="none";
 	document.querySelector(".btn.copiar").style.display = "block";
-	if (innerWidth >= 992) {
+	resultArea.style.justifyContent = "space-between";
+	if (window.innerWidth >= 992) {
 		document.querySelector(".svg-woman").style.display = "none";
 	}
 	result.style.display = "inline-block";
@@ -23,8 +25,6 @@ const mostrarTexto = (texto) =>{
 	result.textContent = texto;
 	result.style.height = "15px";
 	result.style.height = (result.scrollHeight + 4) + "px";
-
-	copiarTexto();
 }
 
 const encriptarTexto = texto =>{
@@ -48,11 +48,17 @@ const encriptarTexto = texto =>{
 
 	}else {
 		alert("El texto ingresado sólo debe tener minusculas y ningun tilde");
+		if (window.innerWidth <= 992) {
+			document.querySelector(".svg-woman").style.display = "none";
+		} else {
+
+			document.querySelector(".svg-woman").style.display = "block";
+		}
 		document.querySelector(".result-area > h3").style.display ="block";
-		result.classList.replace("mostrar-result","result");
-		result.textContent = "Ingresa el texto que desees encriptar o desencriptar";
+		result.style.display = "none";
+		document.querySelector(".texto-descriptivo").style.display = "block";
 		document.querySelector(".btn.copiar").style.display = "none";
-		document.querySelector(".svg-woman").style.display = "none";
+		resultArea.style.justifyContent = "";
 	}
 };
 
@@ -65,8 +71,32 @@ const desencriptarTexto = texto =>{
 		nuevoTexto = nuevoTexto.replace(/ufat/g,"u");
 		mostrarTexto(nuevoTexto);
 		text.value ="";
+	}else {
+		
+	
+		alert("El texto a desencriptar debe ser texto ya encriptado");
+		document.querySelector(".result-area > h3").style.display ="block";
+		result.style.display = "none";
+		document.querySelector(".texto-descriptivo").style.display = "block";
+		document.querySelector(".btn.copiar").style.display = "none";
+		if (window.innerWidth <= 992) {
+			document.querySelector(".svg-woman").style.display = "none";
+		} else {
+
+			document.querySelector(".svg-woman").style.display = "block";
+		}
+		resultArea.style.justifyContent = "";
 	}
 }
+
+window.addEventListener("resize", ()=>{
+	if(window.innerWidth <= 992){
+		document.querySelector(".svg-woman").style.display = "none";
+	}
+	if (window.innerWidth >= 993) {
+		document.querySelector(".svg-woman").style.display = "block";
+	}
+});
 
 btn.forEach(item => {
 	item.addEventListener("click",(e)=>{
@@ -80,7 +110,7 @@ btn.forEach(item => {
 			
 		}
 		if(e.target.value == "Copiar") {
-			copiarTexto(text.value);
+			copiarTexto();
 			
 		}
 	});

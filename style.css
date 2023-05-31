@@ -115,7 +115,7 @@ main{
 	margin-bottom: 16px;
 }
 
-.result {
+.texto-descriptivo {
 	color: #495057;
 	line-height: 24px;
 }
@@ -196,8 +196,12 @@ main{
 
 	.text-area {
 		padding-left: 50px;
+		padding-bottom: 25px;
 		width: 100%;
 		padding-top: 10vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	.btn-container{
@@ -217,7 +221,6 @@ main{
 	.result-area {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
 		margin: 0px;
 		width: 100%;
 	}
@@ -227,6 +230,10 @@ main{
 		display: block;
 		display: flex;
 		justify-content: center;
+	}
+
+	.texto-descriptivo {
+		display: block;
 	}
 
 	#mostrar-result {
